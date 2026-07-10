@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For A'mal ❤️</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Great+Vibes&family=Noto+Kufi+Arabic:wght@300;600;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        .font-amiri {
+            font-family: 'Amiri', serif;
+        }
+
+        .font-kufi {
+            font-family: 'Noto Kufi Arabic', sans-serif;
+        }
+
+        .font-cursive {
+            font-family: 'Great Vibes', cursive;
+        }
+
+        :root {
+            --burgundy-dark: #1a0208;
+            --burgundy-light: #4a0e18;
+            --gold: #d4af37;
+            --gold-light: #f3e5ab;
+        }
+
+        body {
+            background-color: var(--burgundy-dark);
+            overflow: hidden;
+            height: 100vh;
+            color: white;
+            margin: 0;
+            user-select: none;
+        }
+
+
+        .glass-card {
+            background: rgba(20, 20, 20, 0.45);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .text-gold-gradient {
+            background: linear-gradient(to bottom, var(--gold-light), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-gold {
+            background: linear-gradient(45deg, #a67c00, #d4af37, #f3e5ab, #d4af37);
+            background-size: 300% 300%;
+            color: #1a0208;
+            border: none;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.6);
+        }
+
+
+        #story-view,
+        #slowmo-view,
+        #choices-view,
+        #future-view,
+        #gallery-view,
+        #letters-view {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 50;
+            display: none;
+            background: black;
+        }
+
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transform: scale(1);
+            z-index: 1;
+            filter: brightness(0.6) contrast(1.1);
+        }
+
+        .slide.active .slide-bg {
+            animation: kenBurns 20s ease-out forwards;
+        }
+
+        @keyframes kenBurns {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.2);
+            }
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.2) 0%, rgba(26, 2, 8, 0.9) 100%);
+            z-index: 2;
+        }
+
+        .story-text {
+            font-size: 2.2rem;
+            line-height: 1.8;
+            color: var(--gold-light);
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+            min-height: 120px;
+            font-weight: 600;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1em;
+            background-color: var(--gold);
+            margin-right: 4px;
+            animation: blink 1s step-end infinite;
+        }
+
+
+        .shooting-star {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            height: 2px;
+            background: linear-gradient(-45deg, rgba(255, 255, 255, 1), rgba(0, 0, 255, 0));
+            border-radius: 999px;
+            filter: drop-shadow(0 0 6px rgba(255, 255, 255, 1));
+            animation: tail 3000ms ease-in-out infinite, shooting 3000ms ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .shooting-star::before {
+            content: '';
+            position: absolute;
+            top: calc(50% - 1px);
+            right: 0;
+            height: 2px;
+            background: linear-gradient(-45deg, rgba(0, 0, 255, 0), rgba(255, 255, 255, 1), rgba(0, 0, 255, 0));
+            transform: translateX(50%) rotateZ(45deg);
+            border-radius: 100%;
+            animation: shining 3000ms ease-in-out infinite;
+        }
+
+        @keyframes tail {
+            0% {
+                width: 0;
+            }
+
+            30% {
+                width: 100px;
+            }
+
+            100% {
+                width: 0;
+            }
+        }
+
+        @keyframes shooting {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(300px);
+            }
+        }
+
+        @keyframes shining {
+            0% {
+                width: 0;
+            }
+
+            50% {
+                width: 30px;
+            }
+
+            100% {
+                width: 0;
+            }
+        }
+
+        .polaroid {
+            background: white;
+            padding: 10px 10px 25px 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transform: rotate(-2deg);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.1);
+            z-index: 20;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border: 1px solid #eee;
+        }
+
+        .polaroid p {
+            color: #333;
+            text-align: center;
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+
+
+        .envelope-container {
+            perspective: 1000px;
+        }
+
+        .envelope {
+            position: relative;
+            background: #d4af37;
+            height: 120px;
+            width: 180px;
+            margin: 0 auto;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .envelope:hover {
+            transform: translateY(-5px);
+        }
+
+        .envelope::after {
+
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-left: 90px solid transparent;
+            border-right: 90px solid transparent;
+            border-top: 60px solid #f3e5ab;
+
+            transition: transform 0.4s;
+            transform-origin: top;
+        }
+
+        .envelope.open::after {
+            transform: rotateX(180deg);
+            z-index: 0;
+        }
+
+        .letter-card {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: white;
+            color: #333;
+            padding: 30px;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 10px;
+            z-index: 100;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.5);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .letter-card.visible {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+
+        .lux-input {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--gold-light);
+        }
+
+        .lux-input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-up {
+            animation: fadeUp 1s ease-out forwards;
+        }
+
+        .animate-shake {
+            animation: shake 0.4s ease-in-out;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            75% {
+                transform: translateX(5px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .story-text {
+                font-size: 1.6rem;
+                padding: 0 1rem;
+            }
+
+            #choices-view .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* أنيميشن نبض واهتزاز مستمر للقلب الكبير بناءً على طلبك */
+        @keyframes heartInfiniteBeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.18) rotate(-3deg); }
+            30% { transform: scale(0.97) rotate(3deg); }
+            45% { transform: scale(1.15) rotate(-2deg); }
+            60% { transform: scale(0.98) rotate(2deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+        .animate-heart-infinite {
+            animation: heartInfiniteBeat 1.4s infinite ease-in-out;
+        }
+    </style>
+</head>
+
+
+<body class="flex items-center justify-center font-kufi">
+
+
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="shooting-star" style="top: 10%; left: 20%; animation-delay: 0s;"></div>
+        <div class="shooting-star" style="top: 30%; left: 80%; animation-delay: 2s;"></div>
+        <div class="shooting-star" style="top: 60%; left: 40%; animation-delay: 4s;"></div>
+        <div class="shooting-star" style="top: 80%; left: 10%; animation-delay: 6s;"></div>
+    </div>
+
+
+    <button id="music-control" onclick="toggleMusic()"
+        class="fixed bottom-8 right-8 z-[100] w-12 h-12 rounded-full border border-[#d4af37] text-[#d4af37] flex items-center justify-center opacity-0 transition-opacity duration-500 hover:bg-[#d4af37]/20 backdrop-blur-sm">
+        <i class="fas fa-music"></i>
+    </button>
+    <audio id="bg-music" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-romantic-piano-242.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="login-view" class="w-full h-full flex items-center justify-center relative">
+        <canvas id="particles" class="absolute top-0 left-0 w-full h-full z-0"></canvas>
+
+        <div id="login-card"
+            class="glass-card rounded-2xl p-10 text-center relative z-10 w-full max-w-md mx-4 animate-fade-up">
+            <div class="mb-6 relative">
+                <i class="fas fa-heart text-6xl text-[#d4af37] drop-shadow-lg animate-pulse"></i>
+                <i class="fas fa-sparkles text-2xl text-white absolute top-0 right-1/3 animate-bounce"></i>
+            </div>
+            <h1 class="font-amiri text-4xl mb-2 text-gold-gradient font-bold">ازيك يا امولة</h1>
+            <p class="font-amiri text-lg text-rose-200/80 mb-8">دخلي كلمة السر يا آمال ❤️</p>
+
+            <div class="space-y-6">
+                <input type="password" id="passwordInput"
+                    class="lux-input w-full px-5 py-3 rounded-full text-center text-xl tracking-[0.2em]"
+                    placeholder="••••" dir="ltr">
+                <button onclick="checkPassword()"
+                    class="btn-gold w-full py-3 rounded-full font-bold text-xl font-amiri">دخول</button>
+            </div>
+            <p id="error-msg" class="text-rose-400 font-amiri text-sm mt-4 opacity-0 transition-opacity">كلمة المرور غير
+                صحيحة</p>
+        </div>
+    </div>
+
+    <div id="story-view">
+        <div id="slides-container"></div>
+        <div id="final-action"
+            class="absolute top-0 left-0 w-full h-full flex items-center justify-center z-40 bg-black/60 opacity-0 pointer-events-none transition-opacity duration-1000 backdrop-blur-sm">
+            <button onclick="triggerSlowMoTransition()"
+                class="btn-gold px-12 py-5 rounded-full font-bold text-3xl font-amiri shadow-[0_0_50px_rgba(212,175,55,0.6)] animate-pulse transform hover:scale-110 transition-transform">
+                كمّلي يا آمال ❤️
+            </button>
+        </div>
+    </div>
+
+    <!-- شاشة السلو-موشن الانتقالية -->
+    <div id="slowmo-view" class="flex items-center justify-center bg-black/95">
+        <div class="relative z-10 text-center max-w-3xl px-6">
+            <p id="slowmo-text" class="font-amiri text-3xl md:text-4xl text-gold-gradient font-bold leading-relaxed opacity-0 transition-opacity duration-[2000ms]"></p>
+        </div>
+    </div>
+
+
+    <div id="choices-view" class="flex items-center justify-center overflow-y-auto py-10 relative">
+        <div
+            class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1920&auto=format&fit=crop')] bg-cover opacity-20">
+        </div>
+
+        <!-- زرار القلب أعلى اليسار -->
+        <button onclick="triggerLoveSurprise()" class="absolute top-6 left-6 z-[60] text-rose-500 hover:text-rose-400 text-3xl transition-transform duration-300 hover:scale-125 animate-pulse filter drop-shadow-[0_0_10px_rgba(244,63,94,0.6)]">
+            <i class="fas fa-heart"></i>
+        </button>
+
+        <!-- طبقة الأنيميشن المفاجئة الموسطنة بالكامل -->
+        <div id="love-surprise-overlay" class="absolute inset-0 bg-black/92 z-[70] hidden flex flex-col items-center justify-center opacity-0 transition-opacity duration-700 backdrop-blur-md">
+            
+            <!-- كادر القلب الكبير المستمر في الاهتزاز والنبض في المنتصف تماماً -->
+            <div id="surprise-heart-box" class="absolute inset-0 flex items-center justify-center text-center opacity-0 transition-all duration-700">
+                <div class="relative flex items-center justify-center animate-heart-infinite">
+                    <i class="fas fa-heart text-[17rem] md:text-[25rem] text-rose-600 filter drop-shadow-[0_0_60px_rgba(225,29,72,0.8)]"></i>
+                    <span class="absolute font-cursive text-4xl md:text-6xl text-white font-bold tracking-wider select-none">I love you</span>
+                </div>
+            </div>
+
+            <!-- كادر الكلام الثاني الموسطن تماماً بعد اختفاء القلب -->
+            <div class="absolute inset-0 flex items-center justify-center text-center pointer-events-none">
+                <p id="surprise-text" class="font-cursive text-3xl md:text-5xl text-[#f3e5ab] font-semibold tracking-wide px-6 opacity-0 transition-all duration-1000 transform translate-y-8"></p>
+            </div>
+
+            <!-- جملة (صنع بكل حب) بالأسفل -->
+            <div id="made-with-love" class="absolute bottom-10 text-center opacity-0 transition-opacity duration-1000">
+                <p class="font-amiri text-lg md:text-xl text-rose-300/60 tracking-widest">صُنع بكل حب ❤️</p>
+            </div>
+        </div>
+
+        <div class="relative z-10 w-full max-w-5xl px-4 text-center mt-10">
+            <h2 class="font-amiri text-4xl md:text-5xl mb-12 text-gold-gradient font-bold drop-shadow-lg animate-fade-up">
+                العالم بتاعك يا آمال</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-10">
+
+                <div onclick="startReasonsStory()"
+                    class="glass-card p-6 rounded-2xl cursor-pointer hover:bg-white/10 transition-all duration-300 hover:-translate-y-2 group animate-fade-up"
+                    style="animation-delay: 0.1s;">
+                    <i class="fas fa-heart text-4xl text-rose-400 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="text-2xl font-bold text-[#d4af37] mb-1">ليه بحبك؟</h3>
+                    <p class="text-gray-300 text-sm font-amiri">أسباب لا تنتهي</p>
+                </div>
+
+                <div onclick="showGallery()"
+                    class="glass-card p-6 rounded-2xl cursor-pointer hover:bg-white/10 transition-all duration-300 hover:-translate-y-2 group animate-fade-up"
+                    style="animation-delay: 0.2s;">
+                    <i
+                        class="fas fa-camera-retro text-4xl text-blue-300 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="text-2xl font-bold text-[#d4af37] mb-1">ذكرياتنا</h3>
+                    <p class="text-gray-300 text-sm font-amiri">صور ولحظات</p>
+                </div>
+
+                <div onclick="showLetters()"
+                    class="glass-card p-6 rounded-2xl cursor-pointer hover:bg-white/10 transition-all duration-300 hover:-translate-y-2 group animate-fade-up"
+                    style="animation-delay: 0.3s;">
+                    <i
+                        class="fas fa-envelope-open-text text-4xl text-yellow-200 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="text-2xl font-bold text-[#d4af37] mb-1">رسايل ليكي</h3>
+                    <p class="text-gray-300 text-sm font-amiri">افتحيها في وقتها</p>
+                </div>
+
+
+                <div onclick="showFuture()"
+                    class="glass-card p-6 rounded-2xl cursor-pointer hover:bg-white/10 transition-all duration-300 hover:-translate-y-2 group animate-fade-up"
+                    style="animation-delay: 0.4s;">
+                    <i class="fas fa-star text-4xl text-[#f3e5ab] mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="text-2xl font-bold text-[#d4af37] mb-1">مستقبلنا</h3>
+                    <p class="text-gray-300 text-sm font-amiri">أحلامنا الجاية</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="future-view" class="flex items-center justify-center overflow-y-auto">
+        <div
+            class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1434394673726-e8232a5903b4?q=80&w=1920&auto=format&fit=crop')] bg-cover opacity-20">
+        </div>
+        <div class="relative z-10 w-full max-w-2xl px-6 py-12">
+            <h2 class="font-amiri text-4xl text-center mb-10 text-gold-gradient font-bold">قائمة أحلامنا</h2>
+            <div id="future-list" class="space-y-6"></div>
+            <div class="text-center mt-12">
+                <button onclick="backToChoices()"
+                    class="text-[#d4af37] border-b border-[#d4af37] pb-1 hover:text-white transition-colors font-amiri">رجوع</button>
+            </div>
+        </div>
+    </div>
+
+   <div id="gallery-view" class="overflow-y-auto h-full w-full block px-4 py-12 relative">
+        <div
+            class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1478720568477-152d9b164e63?q=80&w=1920&auto=format&fit=crop')] bg-cover opacity-20 bg-fixed">
+        </div>
+        <h2 class="font-amiri text-4xl text-center mb-12 text-gold-gradient font-bold relative z-10 mt-6">أجمل اللحظات</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10 max-w-6xl mx-auto w-full pb-12">
+            <!-- P1 -->
+            <div class="polaroid" style="transform: rotate(2deg);">
+                <img src="images/1time.jpeg"
+                    alt="Memory">
+                <p>أول مره أتكلمنا فيها</p>
+            </div>
+            <!-- P2 -->
+            <div class="polaroid" style="transform: rotate(-3deg);">
+                <img src="images/IMG20250722123554.jpg"
+                    alt="Memory">
+                <p>اول يوم شوفتك في الكورس</p>
+            </div>
+            <!-- P3 -->
+            <div class="polaroid" style="transform: rotate(1deg);">
+                <img src="images/IMG20250803124424.jpg"
+                    alt="Memory">
+                <p>اخر امتحان في الكورس</p>
+            </div>
+            <!-- P4 -->
+            <div class="polaroid" style="transform: rotate(-2deg);">
+                <img src="images/Snapchat-80038125.jpg"
+                    alt="Memory">
+                <p>الخروج معاكي</p>
+            </div>
+            <!-- P5 -->
+            <div class="polaroid" style="transform: rotate(3deg);">
+                <img src="images/Snapchat-1470129110.jpg"
+                    alt="Memory">
+                <p>و كمان خروجه عشان متقوليش حارمك من حاجه</p>
+            </div>
+            <!-- P6 -->
+            <div class="polaroid" style="transform: rotate(-1deg);">
+                <img src="images/Snapchat-721482168.jpg"
+                    alt="Memory">
+                <p>عيد ميلادك😉😉</p>
+            </div>
+            <!-- P7 -->
+            <div class="polaroid" style="transform: rotate(2deg);">
+                <img src="images/IMG20250824185807.jpg"
+                    alt="Memory">
+                <p>و انا بشاركك تفاصيل يومي</p>
+            </div>
+            <!-- P8 -->
+            <div class="polaroid" style="transform: rotate(-2deg);">
+                <img src="images/calll.jpeg"
+                    alt="Memory">
+                <p>الكولز بتاعتك و كمان الفيديو كولز</p>
+            </div>
+        </div>
+        
+        <div class="text-center relative z-20 w-full pb-16">
+            <button onclick="backToChoices()"
+                class="text-[#d4af37] border-b border-[#d4af37] pb-1 hover:text-white transition-colors font-amiri inline-block mx-auto text-xl">و كل ذكرياتي معاكي حلوة يا امولة, دوسي هنا عشان ترجعي لورا بقى 😂</button>
+        </div>
+    </div>
+
+
+    <div id="letters-view" class="flex flex-col items-center justify-center overflow-y-auto">
+        <div
+            class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1578301978693-85ea9ec2a20c?q=80&w=1920&auto=format&fit=crop')] bg-cover opacity-20">
+        </div>
+        <h2 class="font-amiri text-4xl text-center mb-16 text-gold-gradient font-bold relative z-10">افتحيها لما...</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10 px-4">
+
+            <div class="text-center group">
+                <div class="envelope" onclick="openLetter(1, this)">
+                    <i class="fas fa-heart text-red-500 opacity-50 text-2xl"></i>
+                </div>
+                <p class="mt-4 font-amiri text-xl text-white">لما أوحشك</p>
+            </div>
+
+            <div class="text-center group">
+                <div class="envelope" onclick="openLetter(2, this)">
+                    <i class="fas fa-sad-tear text-blue-500 opacity-50 text-2xl"></i>
+                </div>
+                <p class="mt-4 font-amiri text-xl text-white">لما تكوني زعلانة مني</p>
+            </div>
+
+            <div class="text-center group">
+                <div class="envelope" onclick="openLetter(3, this)">
+                    <i class="fas fa-star text-yellow-500 opacity-50 text-2xl"></i>
+                </div>
+                <p class="mt-4 font-amiri text-xl text-white">لما تنجحي</p>
+            </div>
+        </div>
+
+        <button onclick="backToChoices()"
+            class="text-[#d4af37] border-b border-[#d4af37] pb-1 hover:text-white transition-colors font-amiri relative z-20 mt-16">رجوع
+            للقائمة</button>
+
+
+        <div id="letter-modal" class="letter-card font-amiri">
+            <h3 id="letter-title" class="text-2xl font-bold mb-4 text-[#d4af37]">عنوان الرسالة</h3>
+            <p id="letter-content" class="text-lg leading-relaxed text-gray-700">محتوى الرسالة...</p>
+            <button onclick="closeLetter()"
+                class="mt-6 px-6 py-2 bg-[#d4af37] text-white rounded-full hover:bg-[#b5952f]">إغلاق</button>
+        </div>
+        <div id="letter-overlay" class="fixed inset-0 bg-black/60 z-90 hidden" onclick="closeLetter()"></div>
+    </div>
+
+    <script>
+
+        {
+
+            const MAIN_STORY = [
+                { text: "في يوم الجمعه ١١/٧ فتحت شات سفير التفوق بعد ما ماما طردتني من عند تيتا عشان اتخانقت مع حبيبه....", img: "images/IMG20250711180911.jpg" },
+                { text: "لقيت حد بيدور على ناس من المنوفيه عشان شيئ ما و قولت له انا من المنوفيه ...", img: "https://images.unsplash.com/photo-1520052205864-92d242b3a76b?q=80&w=1920&auto=format&fit=crop" },
+                { text: "لقيته بعت ليا ماسدج برايفت فيها محتوى كورس ما و من هنا ممكن اقول دي بدايه القصه.....", img: "images/IMG_20250720_011955.jpg" },
+                { text: "و كلمه من هنا على كلمه من هناك بدأت استريح و الوقت ياخدني معاكي و من ساعتها لحد دلوقتي محدش عرف ولا هيعرف يسحلني معاه كده، و عشان انت مميزه جبتك هنا عشان اقولك.....", img: "images/22.jpg" }
+            ];
+
+            const REASONS_STORY = [
+                { text: "بحبك عشان قلبك الأبيض اللي مفيش زيه في الدنيا دي كلها.", img: "https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?q=80&w=1920&auto=format&fit=crop" },
+                { text: "عشان دائما جنبي و حاسه بيا.....", img: "https://images.unsplash.com/photo-1494774157365-9e04c6720e47?q=80&w=1920&auto=format&fit=crop" },
+                { text: "ببساطة.. بحبك عشان انت آمال ❤️", img: "https://images.unsplash.com/photo-1516726817505-f5ed8259b496?q=80&w=1920&auto=format&fit=crop" }
+            ];
+
+            const FUTURE_LIST = [
+                "نعمل بيت دافي وهادي يشبهنا 🏡 و نربي فيه زوبه و سيودة و نعيشهم احلى طفوله في الدنيا",
+                "نسافر سوا ✈️",
+                "نقف جنب بعض في كل نجاح ونعدي كل صعب ",
+                "نسهر سوا و نسمع فيبم بليل في بيتنا",
+                "نشرب شاي الصبح كل يوم سوا ☕",
+                "نفضل ماسكين ايد بعض لحد ما نعجز 👵👴"
+            ];
+
+            const LETTER_CONTENTS = {
+                1: { title: "لما توحشيني", body: "خليكي عارفه اني هنا جنبك و اه كلامي ليكي بيفرق كل يوم لكن احنا اختارنا أننا نبعد عشان ربنا، عشان يبقى لينا نصيب في الحلال، عشان تبقي مراتي في يوم من الأيام يا آمال..." },
+                2: { title: "لما تكوني زعلانة مني", body: "عارف انك ممكن تزعلي مني بس و الله مش عايز اسيبك ولا ابعد عنك..... ممكن اكون مضغوط شويه او تعبان شويه فا اعذريني يا امولة و خليكي عارفه اني كده كده هصالحك و مستحيل اسيبك كده ♥️" },
+                3: { title: "لما تنجحي", body: "كنت واثق فيكي! انتي اشطر واجمل حد في الدنيا. النجاح ده يليق بيكي، ومن نجاح لنجاح يا حبيبتي." }
+            };
+            
+            const VALID_PASSWORDS = ["AMAL", "Amal", "amal", "2025", "امال"];
+
+
+            const views = {
+                login: document.getElementById('login-view'),
+                story: document.getElementById('story-view'),
+                slowmo: document.getElementById('slowmo-view'),
+                choices: document.getElementById('choices-view'),
+                future: document.getElementById('future-view'),
+                gallery: document.getElementById('gallery-view'),
+                letters: document.getElementById('letters-view')
+            };
+            const bgMusic = document.getElementById('bg-music');
+            const musicControl = document.getElementById('music-control');
+
+
+
+            window.switchView = function (viewName) {
+                Object.values(views).forEach(el => {
+                    if(el) {
+                        el.style.opacity = '0';
+                        setTimeout(() => el.style.display = 'none', 500);
+                    }
+                });
+
+                const target = views[viewName];
+                if (target) {
+                    setTimeout(() => {
+                        target.style.display = (['choices', 'gallery', 'letters', 'future'].includes(viewName)) ? 'flex' : 'block';
+                        if(viewName === 'gallery') target.style.display = 'block'; 
+                        void target.offsetWidth;
+                        target.style.opacity = '1';
+                        target.style.transition = 'opacity 0.8s ease';
+                    }, 500);
+                }
+            }
+
+            window.backToChoices = function () {
+                window.switchView('choices');
+            }
+
+            window.checkPassword = function () {
+                const val = document.getElementById('passwordInput').value.toLowerCase().trim();
+                if (VALID_PASSWORDS.includes(val)) {
+                    document.getElementById('error-msg').style.opacity = '0';
+                    document.getElementById('login-card').style.transform = 'translateY(-20px)';
+                    document.getElementById('login-card').style.opacity = '0';
+                    setTimeout(() => {
+                        views.login.style.display = 'none';
+                        window.initStory(MAIN_STORY, true);
+                        window.toggleMusic(true);
+                    }, 800);
+                } else {
+                    const msg = document.getElementById('error-msg');
+                    msg.style.opacity = '1';
+                    document.getElementById('login-card').classList.add('animate-shake');
+                    setTimeout(() => document.getElementById('login-card').classList.remove('animate-shake'), 400);
+                }
+            }
+
+
+            const passInput = document.getElementById('passwordInput');
+            if (passInput) {
+                passInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') window.checkPassword() });
+            }
+
+            window.toggleMusic = function (forcePlay = false) {
+                if (forcePlay || bgMusic.paused) {
+                    bgMusic.play().then(() => {
+                        musicControl.style.opacity = '1';
+                        musicControl.classList.add('animate-pulse');
+                    }).catch(e => console.log("Audio waiting"));
+                } else {
+                    bgMusic.pause();
+                }
+            }
+
+            window.initStory = function (data, isMain) {
+
+                const finalBtn = document.getElementById('final-action');
+                finalBtn.style.opacity = '0';
+                finalBtn.style.pointerEvents = 'none';
+
+                views.story.style.display = 'block';
+                views.story.style.opacity = '1';
+                const container = document.getElementById('slides-container');
+                container.innerHTML = '';
+
+                data.forEach((item, i) => {
+                    const div = document.createElement('div');
+                    div.className = 'slide';
+                    div.id = `slide-${i}`;
+                    div.innerHTML = `
+                        <div class="slide-bg" style="background-image: url('${item.img}')"></div>
+                        <div class="overlay"></div>
+                        <div class="relative z-10 text-center max-w-4xl px-4">
+                            <p class="story-text font-kufi" id="text-${i}"></p>
+                        </div>`;
+                    container.appendChild(div);
+                });
+                playSlide(0, data, isMain);
+            }
+
+            function playSlide(index, data, isMain) {
+                if (index >= data.length) {
+                    if (isMain) {
+                        const btn = document.getElementById('final-action');
+                        btn.style.pointerEvents = 'auto';
+                        btn.style.opacity = '1';
+                    } else {
+                        setTimeout(() => window.backToChoices(), 2000);
+                    }
+                    return;
+                }
+                const slide = document.getElementById(`slide-${index}`);
+                if(slide) {
+                    slide.classList.add('active');
+
+                    const textEl = document.getElementById(`text-${index}`);
+                    const text = data[index].text;
+                    let i = 0;
+                    textEl.innerHTML = '<span class="cursor"></span>';
+                    const interval = setInterval(() => {
+                        textEl.innerHTML = text.substring(0, i) + '<span class="cursor"></span>';
+                        i++;
+                        if (i > text.length) {
+                            clearInterval(interval);
+                            setTimeout(() => {
+                                textEl.querySelector('.cursor').style.display = 'none';
+                                setTimeout(() => {
+                                    slide.querySelector('p').style.opacity = '0';
+                                    slide.querySelector('p').style.transition = 'opacity 1s';
+                                    setTimeout(() => {
+                                        slide.classList.remove('active');
+                                        setTimeout(() => playSlide(index + 1, data, isMain), 500);
+                                    }, 1000);
+                                }, 2500);
+                            }, 500);
+                        }
+                    }, 60);
+                }
+            }
+
+            // وظيفة الانتقال السينمائي البطيء (Slow Motion)
+            window.triggerSlowMoTransition = function() {
+                // إخفاء كادر القصة الأساسية
+                views.story.style.opacity = '0';
+                setTimeout(() => {
+                    views.story.style.display = 'none';
+                    
+                    // إظهار شاشة السلو موشن
+                    views.slowmo.style.display = 'flex';
+                    void views.slowmo.offsetWidth;
+                    views.slowmo.style.opacity = '1';
+                    views.slowmo.style.transition = 'opacity 1s ease';
+
+                    const slowmoTextEl = document.getElementById('slowmo-text');
+                    const textToType = "ده عالم اتعمل ليكي لواحدك عشان تعرفي اني دائما هنا جنبك و عشانك...";
+                    let charIndex = 0;
+                    
+                    slowmoTextEl.style.opacity = '1';
+                    slowmoTextEl.innerHTML = '';
+                    
+                    // كتابة بطيئة جداً وهادئة (سلو موشن)
+                    const slowTypeInterval = setInterval(() => {
+                        slowmoTextEl.innerHTML = textToType.substring(0, charIndex) + '<span class="cursor"></span>';
+                        charIndex++;
+                        
+                        if (charIndex > textToType.length) {
+                            clearInterval(slowTypeInterval);
+                            const cursor = slowmoTextEl.querySelector('.cursor');
+                            if(cursor) cursor.style.display = 'none';
+                            
+                            // إبقاء الجملة ثابتة لثانيتين للقراءة العميقة ثم الانتقال التلقائي
+                            setTimeout(() => {
+                                window.switchView('choices');
+                            }, 2500);
+                        }
+                    }, 90); // سرعة أبطأ لإعطاء إحساس الـ Slow Motion
+                    
+                }, 500);
+            }
+
+            // وظيفة مفاجأة القلب الخاصة بآمال المحدثة بالكامل والتوسيط والاهتزاز المستمر
+            window.triggerLoveSurprise = function() {
+                const overlay = document.getElementById('love-surprise-overlay');
+                const heartBox = document.getElementById('surprise-heart-box');
+                const textEl = document.getElementById('surprise-text');
+                const footerEl = document.getElementById('made-with-love');
+
+                // إعادة تعيين المشهد بالكامل لحالته الصفرية قبل الأنيميشن
+                overlay.classList.remove('hidden');
+                textEl.innerText = '';
+                textEl.style.opacity = '0';
+                textEl.style.transform = 'translateY(30px)';
+                heartBox.style.opacity = '0';
+                heartBox.style.transform = 'scale(0.5)';
+                footerEl.style.opacity = '0';
+
+                // 1. إظهار الخلفية المعتمة وضبط وضوح العناصر
+                setTimeout(() => {
+                    overlay.style.opacity = '1';
+                    
+                    // 2. إبراز القلب الموسطن والنابض بشكل مستمر واهتزاز جذاب مع عبارة (صنع بكل حب) بالأسفل
+                    setTimeout(() => {
+                        heartBox.style.opacity = '1';
+                        heartBox.style.transform = 'scale(1)';
+                        footerEl.style.opacity = '1';
+                        
+                        // 3. بقاء القلب يتهز وينبض لمدة 3 ثوانٍ قبل التبديل للنص الثاني
+                        setTimeout(() => {
+                            // إخفاء القلب وحده بنعومة لتهيئة مساحة النص الموسطن
+                            heartBox.style.opacity = '0';
+                            heartBox.style.transform = 'scale(0.8)';
+                            
+                            // 4. إظهار جملة الـ Road mate في منتصف الشاشة بدقة متناهية
+                            setTimeout(() => {
+                                textEl.innerText = "Thanks to be with me my road mate";
+                                textEl.style.opacity = '1';
+                                textEl.style.transform = 'translateY(0)';
+                                
+                                // 5. إبقاء النص واضح لـ 3.5 ثانية للقراءة، ثم إغلاق المشهد بأكمله تدريجياً
+                                setTimeout(() => {
+                                    overlay.style.opacity = '0';
+                                    setTimeout(() => {
+                                        overlay.classList.add('hidden');
+                                    }, 700);
+                                }, 3500);
+
+                            }, 600);
+
+                        }, 3000);
+
+                    }, 400);
+                }, 50);
+            }
+
+            window.showChoices = function () { window.switchView('choices'); }
+            window.startReasonsStory = function () { window.switchView('story'); window.initStory(REASONS_STORY, false); }
+            window.showGallery = function () { window.switchView('gallery'); }
+            window.showLetters = function () { window.switchView('letters'); }
+
+            window.showFuture = function () {
+                window.switchView('future');
+                const list = document.getElementById('future-list');
+                list.innerHTML = '';
+                FUTURE_LIST.forEach((item, i) => {
+                    const div = document.createElement('div');
+                    div.className = 'glass-card p-4 rounded-xl flex items-center gap-4 future-item';
+                    div.innerHTML = `<div class="w-8 h-8 rounded-full bg-[#d4af37] flex items-center justify-center text-black font-bold">${i + 1}</div><span class="text-xl font-kufi text-white">${item}</span>`;
+                    list.appendChild(div);
+                    setTimeout(() => div.classList.add('visible'), i * 400 + 300);
+                });
+            }
+
+            window.openLetter = function (id, element) {
+                element.classList.add('open');
+                setTimeout(() => {
+                    const modal = document.getElementById('letter-modal');
+                    const overlay = document.getElementById('letter-overlay');
+                    document.getElementById('letter-title').innerText = LETTER_CONTENTS[id].title;
+                    document.getElementById('letter-content').innerText = LETTER_CONTENTS[id].body;
+
+                    overlay.classList.remove('hidden');
+                    modal.classList.add('visible');
+                }, 600);
+            }
+
+            window.closeLetter = function () {
+                const modal = document.getElementById('letter-modal');
+                const overlay = document.getElementById('letter-overlay');
+                modal.classList.remove('visible');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+                document.querySelectorAll('.envelope').forEach(e => e.classList.remove('open'));
+            }
+
+
+            const cvs = document.getElementById('particles');
+            const ctx = cvs.getContext('2d');
+            let parts = [];
+
+            function resize() {
+                if (cvs) {
+                    cvs.width = window.innerWidth;
+                    cvs.height = window.innerHeight;
+                }
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+
+            class GoldParticle {
+                constructor() { this.reset(); }
+                reset() {
+                    this.x = Math.random() * cvs.width;
+                    this.y = Math.random() * cvs.height;
+                    this.s = Math.random() * 2 + 0.5;
+                    this.vy = Math.random() * -0.5 - 0.2;
+                    this.op = Math.random() * 0.5 + 0.1;
+                }
+                up() {
+                    this.y += this.vy;
+                    this.op -= 0.002;
+                    if (this.y < 0 || this.op <= 0) this.reset();
+                }
+                dr() {
+                    ctx.fillStyle = `rgba(212,175,55,${this.op})`;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.s, 0, 7);
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < 60; i++) parts.push(new GoldParticle());
+
+            function anim() {
+                ctx.clearRect(0, 0, cvs.width, cvs.height);
+                parts.forEach(p => { p.up(); p.dr() });
+                requestAnimationFrame(anim);
+            }
+            anim();
+        }
+    </script>
+</body>
+
+
+</html>
